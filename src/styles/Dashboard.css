@@ -1,0 +1,573 @@
+.dashboard-container {
+    direction: rtl;
+    text-align: right;
+    max-width: 100%;
+    margin: 0;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f8f9fa;
+    font-family: 'Rubik', Arial, sans-serif;
+}
+
+/* אזור הסינון והכפתורים למעלה */
+.controls-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* תפריט סינון בצד ימין */
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: white;
+    padding: 10px 15px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    width: 40%; /* תופס רק 40% מהרוחב */
+}
+
+.filter-container label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.filter-container select {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background-color: #fff;
+    font-size: 14px;
+    flex-grow: 1; /* תופס את שאר המקום בקונטיינר */
+    transition: all 0.3s;
+}
+
+.filter-container select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+/* כפתור הוספת לקוח */
+.add-client-btn {
+    padding: 12px 16px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+    margin: 0; /* מבטל שוליים שהיו קודם */
+}
+
+.add-client-btn:hover {
+    background-color: #27ae60;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(46, 204, 113, 0.4);
+}
+
+.add-client-btn:active {
+    transform: translateY(1px);
+}
+
+/* קונטיינר של הטבלה - גורם לה לתפוס את כל הרוחב */
+.clients-table-wrapper {
+    width: 100%;
+    overflow-x: hidden; /* מונע גלילה אופקית */
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    background-color: white;
+    border: none;
+    flex-grow: 1; /* הטבלה תגדל ותתפוס את רוב החלל הזמין */
+}
+
+/* גלילה פנימית בטבלה - מאפשר גלילה אנכית אך לא אופקית */
+.clients-table-container {
+    flex-grow: 1;
+    max-height: calc(100vh - 190px); /* מתאים לגובה פחות כותרות ובקרות */
+    overflow-y: auto; /* גלילה למעלה ולמטה */
+    overflow-x: hidden; /* מונע גלילה אופקית */
+    border: none;
+    width: 100%;
+    position: relative;
+    padding-top: 0px;
+    border-radius: 0 0 12px 12px;
+}
+
+/* הטבלה תפרוס את כל הרוחב */
+.clients-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: #fff;
+    border-radius: 0 0 12px 12px;
+    box-shadow: none;
+    table-layout: auto; /* התאמת רוחב עמודות לפי הצורך */
+    white-space: nowrap;
+}
+
+/* עיצוב הכותרות והשורות */
+.clients-table th, .clients-table td {
+    border: none;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 15px 12px;
+    text-align: center;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+.clients-table tr:hover td {
+    background-color: #f9f9f9;
+}
+
+/* הכותרות יישארו קבועות גם בגלילה */
+.clients-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.clients-table th {
+    background-color: #3498db;
+    color: white;
+    font-weight: 500;
+    padding: 16px 12px;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.clients-table th:first-child {
+    border-top-right-radius: 12px;
+}
+
+.clients-table th:last-child {
+    border-top-left-radius: 12px;
+}
+
+/* עיצוב תפריט נפתח (select) בטבלה */
+.clients-table select {
+    width: 100px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background-color: #fff;
+    font-size: 14px;
+    transition: all 0.3s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.clients-table select:hover, .clients-table select:focus {
+    border-color: #3498db;
+    box-shadow: 0 2px 5px rgba(52, 152, 219, 0.2);
+}
+
+/* סגנון עמודות שניתן למיין - עם חיצים קבועים */
+.sortable-header {
+    cursor: pointer;
+    transition: background-color 0.2s;
+    position: relative;
+    user-select: none;
+    padding-left: 20px !important; /* מרווח בצד שמאל עבור החץ */
+}
+
+.sortable-header:hover {
+    background-color: #2980b9; /* כחול כהה יותר בריחוף */
+}
+
+/* חץ מיון קבוע */
+.sortable-header::after {
+    content: "↕"; /* חץ דו-כיווני כברירת מחדל */
+    position: absolute;
+    left: 10px; /* מיקום החץ בצד שמאל */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+/* חץ למעלה כשהמיון עולה */
+.sortable-header.sort-asc::after {
+    content: "↑";
+    opacity: 1;
+}
+
+/* חץ למטה כשהמיון יורד */
+.sortable-header.sort-desc::after {
+    content: "↓";
+    opacity: 1;
+}
+
+/* פס הגלילה */
+.clients-table-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.clients-table-container::-webkit-scrollbar-track {
+    background: #f8f9fa;
+    border-radius: 0 0 12px 0;
+}
+
+.clients-table-container::-webkit-scrollbar-thumb {
+    background: #c0d6e4;
+    border-radius: 10px;
+}
+
+.clients-table-container::-webkit-scrollbar-thumb:hover {
+    background: #3498db;
+}
+
+.client-name-btn {
+    background: none;
+    border: none;
+    color: #1c2fe2;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    padding: 0;
+}
+
+.client-name-btn:hover {
+    color: #1c638d;
+}
+
+.client-name-btn::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #2980b9;
+    transition: width 0.3s;
+}
+
+.client-name-btn:hover::after {
+    width: 100%;
+}
+
+/* עיצוב כפתורי עריכה ומחיקה */
+.edit-btn, .delete-btn {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+    display: inline-block;
+    min-width: 90px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.edit-btn {
+    background-color: #3498db;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* הודעה אם אין לקוחות */
+.no-clients {
+    color: #e74c3c;
+    font-size: 18px;
+    margin-top: 20px; /* מרווח קטן יותר */
+    text-align: center;
+    padding: 15px;  /* ריפוד קטן יותר */
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* עיצוב חלונות עריכה ומחיקה */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: modalFadeIn 0.3s forwards;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* תוכן המודאל */
+.modal-content {
+    background: white;
+    padding: 25px;  /* ריפוד קטן יותר */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 450px;
+    position: relative;
+    z-index: 10000;
+    animation: modalContentSlideIn 0.3s forwards;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+@keyframes modalContentSlideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* עיצוב שדות הקלט במודאל */
+.form-group {
+    margin-bottom: 15px;  /* מרווח קטן יותר */
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 6px;  /* מרווח קטן יותר */
+    color: #333;
+    font-size: 15px;
+}
+
+.modal input, .modal select {
+    width: 100%;
+    padding: 10px;  /* ריפוד קטן יותר */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+}
+
+.modal input:focus, .modal select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+/* כפתורי שמירה וביטול */
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;  /* מרווח קטן יותר */
+    gap: 15px;
+}
+
+.modal-buttons button {
+    flex: 1;
+    padding: 10px;  /* ריפוד קטן יותר */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.modal-buttons button:first-child {
+    background-color: #2ecc71;
+    color: white;
+    box-shadow: 0 3px 8px rgba(46, 204, 113, 0.3);
+}
+
+.modal-buttons button:first-child:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(46, 204, 113, 0.4);
+}
+
+.modal-buttons button:last-child {
+    background-color: #e74c3c;
+    color: white;
+    box-shadow: 0 3px 8px rgba(231, 76, 60, 0.3);
+}
+
+.modal-buttons button:last-child:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(231, 76, 60, 0.4);
+}
+
+/* כותרת הדף */
+.dashboard-container h1 {
+    margin-top: 0;
+    margin-bottom: 15px;  /* מרווח קטן יותר */
+    position: relative;
+    z-index: 10;
+    padding: 8px 0;  /* ריפוד קטן יותר */
+    color: #2c3e50;
+    text-align: center;
+    font-size: 28px;  /* גודל קטן יותר */
+    font-weight: 700;
+}
+
+.dashboard-container h1::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+/* מקטין את עמודת הסטטוס */
+.clients-table td:nth-child(7), 
+.clients-table th:nth-child(7) {
+    width: 110px; /* התאמה מינימלית נדרשת */
+}
+
+/* מקטין את עמודות העריכה והמחיקה */
+.clients-table td:nth-child(8), 
+.clients-table th:nth-child(8),
+.clients-table td:nth-child(9), 
+.clients-table th:nth-child(9) {
+    width: 100px; /* מקטין את העמודות */
+}
+
+/* פלייסהולדרים */
+input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+/* הסתרת פסי גלילה במודאל בדפדפנים שלא תומכים בהם */
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background-color: #d1d1d1;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background-color: #a1a1a1;
+}
+
+/* מידע המשתמש - קטן יותר */
+.user-info {
+    background-color: white;
+    padding: 10px 15px;  /* ריפוד קטן יותר */
+    border-radius: 12px;
+    margin-bottom: 15px;  /* מרווח קטן יותר */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.user-info p {
+    margin: 0;
+    font-size: 14px;  /* גודל קטן יותר */
+    color: #2c3e50;
+}
+
+.user-info strong {
+    color: #3498db;
+    font-weight: 600;
+}
+
+/* כפתור הסגירה (❌) בחלון העריכה */
+.close-modal {
+    position: absolute;
+    top: 12px;  /* מיקום מעודכן */
+    right: 12px;  /* מיקום מעודכן */
+    background: none;
+    border: none;
+    font-size: 18px;  /* גודל קטן יותר */
+    cursor: pointer;
+    color: #aaa;
+    transition: all 0.2s ease-in-out;
+}
+
+.close-modal:hover {
+    color: #e74c3c;
+    transform: scale(1.2);
+}
+
+/* הודעת טעינה */
+.loading {
+    text-align: center;
+    padding: 20px;  /* ריפוד קטן יותר */
+    font-size: 16px;  /* גודל קטן יותר */
+    color: #3498db;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+/* במצב מובייל */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 10px;
+    }
+    
+    .clients-table th, .clients-table td {
+        padding: 10px 8px;
+        font-size: 14px;
+    }
+    
+    .edit-btn, .delete-btn {
+        min-width: auto;
+        padding: 6px 10px;
+    }
+    
+    .modal-content {
+        width: 90%;
+        padding: 20px;
+    }
+    
+    .controls-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .filter-container, .add-client-btn {
+        width: 100%;
+    }
+}
+

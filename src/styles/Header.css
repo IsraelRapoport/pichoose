@@ -1,0 +1,90 @@
+@keyframes colorChange {
+    0% {
+        background-position: 100% 0%;
+    }
+    50% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 0%;
+    }
+}
+
+/* ✅ ההדר נשאר קבוע בראש הדף ולא זז עם הגלילה */
+.header {
+    position: fixed; /* הופך את ההדר לקבוע */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to right, #003366, #99ccff);
+    background-size: 200% 100%;
+    animation: colorChange 10s ease-in-out infinite;
+    text-align: center;
+    padding: 10px 20px; /* הפחתת ה-padding */
+    z-index: 1000; /* מבטיח שההדר יהיה מעל הכל */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ✅ מרווח בין ההדר לתוכן שמתחתיו כדי שלא יכסה אותו */
+.body-container {
+    padding-top: 80px; /* גובה ההדר */
+}
+
+/* עיצוב התמונה */
+.header-image {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+    transition: transform 0.5s ease-in-out;
+    animation: scaleImage 5s infinite alternate ease-in-out;
+}
+
+@keyframes scaleImage {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* מכולה פנימית עם Flex כדי ליישר את התמונה והטקסט בשורה */
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* עיצוב הכותרת הראשית */
+.main-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #aee4ff;
+    margin: 0;
+    text-decoration: none;
+    line-height: 1;
+    transition: transform 0.2s ease-out;
+    will-change: transform;
+}
+
+.main-title:hover {
+    transform: scale(1.1);
+}
+
+/* ✅ עיצוב כפתור "התנתק" ומיקומו בצד שמאל */
+.logout-link {
+    position: absolute;
+    left: 20px; /* הצמדת הכפתור לצד שמאל */
+    cursor: pointer;
+    color: white;
+    font-size: 1.2rem;
+    text-decoration: underline;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+}
+
+.logout-link:hover {
+    color: #ff6666;
+}
+
+
+

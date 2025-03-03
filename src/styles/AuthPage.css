@@ -1,0 +1,79 @@
+/* AuthPage.css */
+
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    margin-top: 80px; /* מתחיל מתחת לכותרת */
+    padding-top: 20px;
+    text-align: center;
+    padding: 20px;
+}
+
+/* תיבת ההתחברות */
+.auth-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 700px;
+    max-width: 90%;
+}
+
+/* כותרת העמוד */
+.auth-container h2 {
+    font-size: 2rem;
+    color: #800000; /* צבע בורדו */
+    margin-bottom: 20px;
+}
+
+/* מיכל קלט – מסדר את כל השדות בצורה אחידה */
+.auth-input-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* מבטיח שכל האינפוטים באותו רוחב */
+}
+
+/* כל האינפוטים – התחברות והרשמה */
+.auth-container input {
+    width: 70%; /* רוחב אחיד לכל השדות */
+    padding: 12px;
+    margin-bottom: 15px; /* רווח בין השדות */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* כפתור התחברות/הרשמה */
+.auth-container button {
+    width: 70%; /* גם הכפתור מותאם ל-70% */
+    padding: 12px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.auth-container button:hover {
+    background-color: darkblue;
+}
+
+/* קישור לעבור בין התחברות להרשמה */
+.auth-container p {
+    margin-top: 10px;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.auth-container p:hover {
+    text-decoration: underline;
+}
