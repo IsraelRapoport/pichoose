@@ -1,0 +1,281 @@
+/* HomePage.css */
+
+html, body {
+    height: 100%; /* הגדרת גובה של 100% למסך כולו */
+    margin: 0; /* מוודא שאין מרווחים ברירת מחדל */
+    padding: 0; /* מוודא שאין ריווח נוסף */
+    overflow-y: auto; /* הגלילה של הדפדפן תתבצע כאן */
+    overflow-x: hidden; /* מונע גלילה אופקית */
+    direction: ltr; /* מוודא שהגלילה בצד ימין */
+}
+
+/* עיצוב הדיב הראשי */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    padding-top: 0;
+    margin-top: 80px;
+    position: relative;
+    overflow: visible;
+    text-align: center;
+    padding: 20px;
+
+    /* רקע התמונה */
+    background-image: url('background-image.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    
+    /* מיקום יחסי כדי שהשכבת כיסוי תוכל להיות מונחת מעל */
+    position: relative;
+}
+
+/* שכבת כיסוי חצי-שקופה מעל הרקע */
+.home-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7); /* שכבת כיסוי לבנה עם שקיפות גבוהה */
+    z-index: 1; /* מבטיח שהשכבה תהיה מעל התמונה אך מתחת לתוכן */
+}
+
+/* מבטיח שהתוכן יישאר קריא מעל הרקע */
+.home-container * {
+    position: relative;
+    z-index: 2;
+    
+}
+
+
+
+
+
+.site-info {
+    text-align: center;
+    margin-bottom: 0px;
+    font-size: 20px;
+    color: #800000; /* צבע בורדו */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden; /* מונע גלילה אופקית */
+    
+}
+
+/* עיצוב כללי עבור הכותרת */
+.site-info h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
+    font-size: 4rem; /* גודל כמו H1 */
+    margin-top: 0px;
+}
+
+
+/* עיצוב שני החלקים של המשפט */
+.text-left, .text-right {
+    display: inline-block;
+    font-size: 4rem; /* גודל כמו H1 */
+    font-weight: bold;
+    opacity: 0; /* מתחילים בלתי נראים */
+    position: relative;
+}
+
+/* החלק שמגיע מימין */
+.text-left {
+    transform: translateX(100%);
+    animation: slideFromRight 1.5s ease-out forwards;
+}
+
+/* החלק שמגיע משמאל */
+.text-right {
+    transform: translateX(-100%);
+    animation: slideFromLeft 1.5s ease-out forwards;
+}
+
+/* אפקט הגעה מימין */
+@keyframes slideFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* אפקט הגעה משמאל */
+@keyframes slideFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* שורה שנייה מופיעה לאחר שהחלקים התחברו */
+.site-info p {
+    opacity: 0;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 1.6s; /* השהיה לאחר חיבור השורה הראשונה */
+}
+
+/* אפקט הופעת השורה השנייה */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* הוספת רווח בין החלקים */
+.text-right::before {
+    content: " "; /* מוסיף רווח לפני המילה TO */
+    margin-right: 10px; /* הגדרת רווח לפני המילה TO */
+}
+
+
+.photographer-login {
+    margin: 20px 0;
+    background-color: rgb(0, 0, 255);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column; /* הסידור יהיה אנכי (אייקון ואז טקסט) */
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* יוצר כפתור עגול */
+    width: 150px; /* רוחב כפתור כעיגול */
+    height: 150px; /* גובה כפתור כעיגול */
+    font-size: 40px; /* גודל האייקון */
+    aspect-ratio: 1/1; /* מבטיח יחס ריבועי כך שהרוחב והגובה תמיד יהיו שווים */
+    margin-top: 0%;
+
+    font-weight: bold;
+    text-align: center; /* מרכז את הטקסט */
+}
+
+.photographer-login svg {
+    color: white; /* צבע האייקון */
+    font-size: 60px; /* גודל האייקון */
+}
+
+.photographer-login span {
+    margin-top: 10px; /* ריווח בין האייקון לטקסט */
+    font-size: 16px; /* גודל פונט לטקסט */
+    color: white; /* צבע טקסט */
+}
+
+.photographer-login:hover {
+    background-color: darkblue;
+}
+
+.search-section {
+    display: block;
+    flex-direction: column; /* סידור האלמנטים בצורה אנכית */
+    align-items: center; /* מיישר את האינפוט והכפתור במרכז */
+    margin-bottom: 20px;
+    width: 100%; /* גודל של 70% מהדיב */
+
+}
+
+.search-section input {
+    margin: 0 auto;
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px; /* ריווח בין האינפוט לכפתור */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 48%; /* גודל של 70% מהדיב */
+    font-size: 16px; /* גודל פונט נעים */
+    text-align: center; /* ממקם את ה-placeholder במרכז */
+}
+
+.search-button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* ריווח בין שני הכפתורים */
+    width: 100%; /* תופס את כל רוחב הדיב */
+}
+
+.search-section button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 50%; /* גודל של 70% מהדיב, כמו האינפוט */
+    font-size: 16px; /* גודל פונט תואם לאינפוט */
+    border-radius: 8px;
+}
+
+.search-section button:hover {
+    background-color: darkblue;
+}
+
+.advanced-search {
+    display: block;
+
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 60%; /* גודל של 70% מהדיב, כמו האינפוט */
+    font-size: 16px; /* גודל פונט תואם לאינפוט */
+}
+
+.advanced-search:hover {
+    background-color: darkblue;
+}
+
+
+
+
+/* כותרת ראשונה */
+.site-info h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
+    font-size: 4rem; /* גודל כמו H1 */
+    margin-top: 15px; /* קרב את הכותרת הראשונה למעלה */
+    margin-bottom: 0px;
+}
+
+/* כותרת שנייה */
+.site-info p {
+    opacity: 0;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: -5px; /* קרב את הכותרת השנייה לכותרת הראשונה */
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 1.6s; /* השהיה לאחר חיבור השורה הראשונה */
+}
+
+/* מיקום גבוה יותר לכל הבלוק של הכותרות */
+.home-container {
+    padding-top: 0px; /* הסרת padding מיותר */
+    margin-top: 50px; /* דוחף את כל התוכן כלפי מעלה */
+}
