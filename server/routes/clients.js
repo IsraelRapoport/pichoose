@@ -189,4 +189,25 @@ router.put("/:id/status", authenticateUser, async (req, res) => {
     }
 });
 
+
+// 📌 קבלת פרטי לקוח ספציפי (דורש טוקן)
+router.get("/:id", authenticateUser, async (req, res) => {
+    const clientId = req.params.id;
+    
+    try {
+        const [client] = await db.query(
+            "SELECT * FROM clients WHERE id = ? AND photographer_id = ?",
+            [clientId, req.user.userId]
+        );
+        
+        if (client.length === 0) {
+            return res.status(404).json({ error: "לקוח לא נמצא" });
+        }
+        
+        res.json(client[0]); // שליחת פרטי הלקוח
+    } catch (error) {
+        console.error("❌ שגיאה בקבלת פרטי לקוח:", error);
+        res.status(500).json({ error: "שגיאה בשרת, נסה שוב מאוחר יותר." });
+    }
+});
 module.exports = router;

@@ -8,6 +8,8 @@ import SearchEvent from "./pages/SearchEvent";
 import ChooseImages from "./pages/ChooseImages";
 import ClientStatus from "./pages/ClientStatus";
 import Header from "./components/Header"; // מייבאים את הכותרת
+import SearchResults from "./pages/SearchResults";
+import ClientGallery from "./pages/ClientGallery";
 
 
 
@@ -31,6 +33,9 @@ function App() {
                     <Route path="/SearchEvent" element={<SearchEvent />} />
                     <Route path="/choose-images/:id" element={<ChooseImages />} />
                     <Route path="/order-status/:id" element={<ClientStatus />} />
+
+                    <Route path="/search" element={<SearchResults />} />
+                    <Route path="/gallery/:clientId" element={<ClientGallery />} />
                     
                 </Routes>
             </div>

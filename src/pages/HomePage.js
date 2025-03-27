@@ -36,7 +36,7 @@ function HomePage() {
                 <div className="search-input-container">
                     <input
                         type="text"
-                        placeholder="חיפוש אירוע - נא הכנס שם לקוח"
+                        placeholder="חיפוש אירוע - נא הכנס שם לקוח/שם צלם"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
@@ -46,9 +46,9 @@ function HomePage() {
                     <div className="search-button">
                         <button onClick={() => navigate(`/search?query=${searchQuery}`)}>🔎 חפש</button>
                     </div>
-                    <div className="search-button">
+                    {/* <div className="search-button">
                         <button className="advanced-search" onClick={() => navigate("/SearchEvent")}>🔍 חיפוש מתקדם</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

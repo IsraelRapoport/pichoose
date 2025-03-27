@@ -348,3 +348,186 @@
         text-align: center;
     }
 }
+
+
+/* תוספת לקובץ CSS הקיים - כפתור מחיקת תמונה */
+.delete-image-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.2s;
+}
+
+.delete-image-button:hover {
+    background-color: #c0392b;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+
+
+/* הוסף את הקוד הבא לסוף קובץ UploadImages.css */
+
+/* סגנון לתמונות שאפשר ללחוץ עליהן */
+.image-clickable {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.image-clickable:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* מוסיף אייקון חיצוני קטן בפינה ימנית תחתונה של התמונה */
+.image-container {
+    position: relative;
+}
+
+.image-container::after {
+    content: '🔍';
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-size: 12px;
+    pointer-events: none;
+}
+
+
+/* הוסף את הקוד הבא לסוף קובץ UploadImages.css */
+
+/* סגנון לתמונות שאפשר ללחוץ עליהן */
+.image-clickable {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.image-clickable:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* אייקון הגדלה בפינת התמונה - אופציה 1 */
+.image-container {
+    position: relative;
+}
+
+.zoom-icon {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 14px;
+    z-index: 5;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+
+
+
+/* הוסף את הקוד הבא לסוף קובץ UploadImages.css */
+
+/* סגנון לתמונות שאפשר ללחוץ עליהן */
+.image-clickable {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.image-clickable:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* אייקון הגדלה בפינת התמונה */
+.zoom-icon {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 14px;
+    z-index: 5;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+
+/* חשוב: מבטל את ה-pseudo-element שהוסף קודם */
+.image-container::after {
+    content: none !important;
+}
+
+
+/* הוסף את הקוד הבא לקובץ UploadImages.css */
+
+/* סגנון לכפתור הורדת תמונות נבחרות */
+.download-button {
+    background-color: #d93a3a;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s;
+}
+
+.download-button:hover {
+    background-color: #9f1a1a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.download-button:active {
+    background-color: #3e8e41;
+}
+
+/* התאמת אזור הפילטרים כך שהכפתורים יסתדרו יפה */
+.gallery-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+@media (max-width: 768px) {
+    .gallery-filters {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .download-button {
+        margin-left: 0;
+        margin-top: 8px;
+    }
+}
